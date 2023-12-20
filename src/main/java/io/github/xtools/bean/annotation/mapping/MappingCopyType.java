@@ -16,6 +16,8 @@ public @interface MappingCopyType {
 
     /**
      * 默认类型自动转换 true：且字段内用XToolMapping.copyType=false该字段不可转换  false：所有字段不可转换
+     *
+     * @return /
      */
     boolean value() default true;
 }

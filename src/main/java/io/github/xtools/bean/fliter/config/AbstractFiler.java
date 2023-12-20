@@ -116,6 +116,8 @@ public abstract class AbstractFiler {
 
     /**
      * 编译文件
+     * @param path /
+     * @throws IOException /
      */
     public static void compile(String path) throws IOException {
         //拿到编译器

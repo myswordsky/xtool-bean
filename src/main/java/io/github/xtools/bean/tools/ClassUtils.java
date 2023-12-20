@@ -50,6 +50,8 @@ public class ClassUtils {
 
     /**
      * 获取父类所有字段
+     * @param element /
+     * @return /
      */
     private static List<VariableElement> getAllFields(Element element){
         List<VariableElement> list = new ArrayList<>();
@@ -74,6 +76,10 @@ public class ClassUtils {
 
     /**
      * 方法执行器
+     * @param clazzName /
+     * @param targetFieldName /
+     * @param sourceFieldValue /
+     * @return /
      */
     public static Object executeMethod(String clazzName, String targetFieldName, Object sourceFieldValue){
         ClassUtils.init(clazzName);

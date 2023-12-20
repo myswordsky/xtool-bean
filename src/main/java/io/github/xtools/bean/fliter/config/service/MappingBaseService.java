@@ -25,6 +25,9 @@ public class MappingBaseService {
 
     /**
      * 是否是基础类型
+     * @param enums /
+     * @param targetFieldType /
+     * @return /
      */
     public static boolean isBaseType(FieldType enums, String targetFieldType){
         return enums.name().toLowerCase().equals(targetFieldType);
@@ -40,6 +43,10 @@ public class MappingBaseService {
 
     /**
      * 没有BaseType的类型
+     * @param filer /
+     * @param entity /
+     * @param statement /
+     * @return /
      */
     protected static String getDealOrNull(AbstractFiler filer, MethodEntity entity, String statement){
         return getDealOrNull(filer, entity, null, statement);
@@ -59,6 +66,10 @@ public class MappingBaseService {
 
     /**
      * 获取日期转化
+     * @param filer /
+     * @param entity /
+     * @param sourceIsDateType /
+     * @return /
      */
     protected String getDateOrNull(AbstractFiler filer, MethodEntity entity, boolean sourceIsDateType){
         String targetFieldNameUp = entity.getTargetFieldNameUp();
@@ -140,6 +151,8 @@ public class MappingBaseService {
     /**
      * 获取Get or Is
      * 基础类型 boolean 是is  包装类是Get
+     * @param sourceFieldType /
+     * @return /
      */
     public static String genGetString(String sourceFieldType){
         return isBaseType(FieldType.Boolean, sourceFieldType) ? "is" : "get";

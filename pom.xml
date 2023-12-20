@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.myswordsky</groupId>
     <artifactId>xtool-bean</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 
     <name>xtool-bean</name>
     <description>An annotation processor for bean mappers</description>
@@ -139,36 +139,37 @@
             <timezone>+8</timezone>
         </developer>
     </developers>
-    <!-- 发布项目到 sonatype -->
-    <distributionManagement>
-        <repository>
-            <id>${repository.releases.id}</id>
-            <name>nexus-releases</name>
-            <url>${repository.releases.url}</url>
-        </repository>
-        <snapshotRepository>
-            <id>${repository.releases.id}</id>
-            <name>nexus-snapshot</name>
-            <url>${repository.snapshots.url}</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <profiles>
         <profile>
-            <id>ossrh</id>
+            <!--注意,此id必须与setting.xml中指定的一致,不要自作聪明改它名字-->
+            <id>release</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <repository.releases.id>ossrh</repository.releases.id>
+                <repository.releases.id>release</repository.releases.id>
                 <repository.releases.url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
                 </repository.releases.url>
                 <repository.snapshots.url>https://s01.oss.sonatype.org/content/repositories/snapshots
                 </repository.snapshots.url>
             </properties>
             <build>
+                <!--发布到中央SNAPSHOT仓库插件-->
                 <plugins>
-                    <!-- 生成java source.jar -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <version>2.5.3</version>
+                        <configuration>
+                            <autoVersionSubmodules>true</autoVersionSubmodules>
+                            <useReleaseProfile>false</useReleaseProfile>
+                            <releaseProfiles>release</releaseProfiles>
+                            <goals>deploy</goals>
+                        </configuration>
+                    </plugin>
+
+                    <!--生成源码插件-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
@@ -182,6 +183,38 @@
                             </execution>
                         </executions>
                     </plugin>
+
+                    <!--生成API文档插件-->
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-javadoc-plugin</artifactId>-->
+<!--                        <version>2.9.1</version>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <id>attach-javadocs</id>-->
+<!--                                <goals>-->
+<!--                                    <goal>jar</goal>-->
+<!--                                </goals>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                    </plugin>-->
+
+                    <!--gpg插件-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
@@ -204,34 +237,35 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.13</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                            <autoDropAfterRelease>true</autoDropAfterRelease>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
                 </plugins>
             </build>
+
+            <distributionManagement>
+                <snapshotRepository>
+                    <!--注意,此id必须与setting.xml中指定的一致-->
+                    <id>release</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>release</id>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
         </profile>
+
     </profiles>
+
+    <!-- 发布项目到 sonatype -->
+    <distributionManagement>
+        <repository>
+            <id>${repository.releases.id}</id>
+            <name>nexus-releases</name>
+            <url>${repository.releases.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>${repository.releases.id}</id>
+            <name>nexus-snapshot</name>
+            <url>${repository.snapshots.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

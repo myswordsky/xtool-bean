@@ -8,6 +8,8 @@ import java.io.StringWriter;
 public class CommonUtils {
     /**
      * 取头字母大写
+     * @param str /
+     * @return /
      */
     public static String getStartStringUp(String str){
         return str.substring(0, 1).toUpperCase() + str.substring(1);
@@ -36,6 +38,9 @@ public class CommonUtils {
 
     /**
      * entity.User,entity.UserOther
+     * @param source /
+     * @param target /
+     * @return /
      */
     public static String getJoinName(Class<?> source, Class<?> target){
         int result = source.getName().compareTo(target.getName());

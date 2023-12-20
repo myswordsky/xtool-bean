@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
-import static javax.tools.Diagnostic.Kind.ERROR;
-
 public abstract class BaseProcessor extends AbstractProcessor {
     protected ProcessingEnvironment env;
     protected Filer filer;
@@ -47,6 +45,8 @@ public abstract class BaseProcessor extends AbstractProcessor {
 
     /**
      * 对注解等配置前置处理
+     * @param element /
+     * @throws Exception /
      */
     protected abstract void doFileProcessor(TypeElement element) throws Exception;
 
@@ -60,6 +60,8 @@ public abstract class BaseProcessor extends AbstractProcessor {
 
     /**
      * 编译文件
+     * @param path /
+     * @throws IOException /
      */
     @SuppressWarnings({"unused", "unchecked"})
     private void compile(String path) throws IOException {

@@ -35,6 +35,8 @@ public class GlobalClassConfig {
 
     /**
      * 生成java文件
+     * @param filer
+     * @param logger
      */
     public static void generate(Filer filer, Consumer<String> logger) {
         if(Error != null){

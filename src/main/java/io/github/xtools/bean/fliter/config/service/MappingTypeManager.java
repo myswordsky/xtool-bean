@@ -28,6 +28,8 @@ public class MappingTypeManager {
 
     /**
      * 是否是基础类型
+     * @param fieldType /
+     * @return /
      */
     public static boolean isBaseEnums(String fieldType){
         return baseEnumsSet.contains(fieldType);
@@ -35,6 +37,9 @@ public class MappingTypeManager {
 
     /**
      * 是否同类型(包装类型视为同类型)
+     * @param sourceFieldType /
+     * @param targetFieldType /
+     * @return /
      */
     public static boolean isSameType(String sourceFieldType, String targetFieldType) {
         if(sourceFieldType.equals(targetFieldType)){

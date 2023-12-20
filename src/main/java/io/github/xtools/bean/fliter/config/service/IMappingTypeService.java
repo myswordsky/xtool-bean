@@ -8,11 +8,17 @@ public interface IMappingTypeService {
 
     /**
      * sourceFieldType.handle
+     *
+     * @param filer /
+     * @param entity /
+     * @return /
      */
     String handle(AbstractFiler filer, MethodEntity entity);
 
     /**
      * 外部扩展实现
+     *
+     * @return /
      */
     Class<?> extendImpl();
 

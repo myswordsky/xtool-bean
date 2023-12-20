@@ -16,11 +16,15 @@ public @interface XToolMapping {
     /**
      * 目标字段名
      * 同target()&&index()用多个，否则随机取其中一个
+     *
+     * @return /
      */
     String target();
 
     /**
      * copy来源字段名
+     *
+     * @return /
      */
     String source() default "";
 
@@ -29,6 +33,8 @@ public @interface XToolMapping {
      * XToolMapping(source = "name", target = "name", index = MappingIndexEnums.First, defaultValue = "\"1\"")
      * void copy(UserDTO first, User second)
      * 则会为第一个参数UserDTO first的name字段赋值 "1" Default两者皆可(前提是两者类型一致，否者需要指定配置)
+     *
+     * @return /
      */
     MappingIndexEnums index() default MappingIndexEnums.Default;
 
@@ -49,6 +55,8 @@ public @interface XToolMapping {
      *         }};"
      * defaultValue = "new new io.github.xtools.bean.entity.config.User(\"name\", 25)"
      * 5 调用接口方法
+     *
+     * @return /
      */
     String defaultValue() default XToolMapping_defaultValue;
 
@@ -69,6 +77,8 @@ public @interface XToolMapping {
      *         }};"
      * targetValue = "new new io.github.xtools.bean.entity.config.User(\"name\", 25)"
      * 5 调用接口方法
+     *
+     * @return /
      */
     String targetValue() default XToolMapping_targetValue;
 
@@ -76,12 +86,16 @@ public @interface XToolMapping {
      * 日期格式
      * 例：dateFormat = "yyyy-MM-dd"
      * 默认："yyyy-MM-dd HH:mm:ss"
+     *
+     * @return /
      */
     String dateFormat() default "";
 
     /**
      * 日期时区
      * 例：timeZone = "GMT+8"
+     *
+     * @return /
      */
     String timeZone() default "";
 
@@ -89,11 +103,15 @@ public @interface XToolMapping {
      * 小数格式化(默认四色五入)
      * 目前支持格式：Double->String Float->String BigDecimal->String
      * 例： numberFormat = "#.##"   1.234 -> "1.23"
+     *
+     * @return /
      */
     String numberFormat() default "";
 
     /**
      * 是否忽略拷贝
+     *
+     * @return /
      */
     boolean ignore() default false;
 
@@ -102,11 +120,15 @@ public @interface XToolMapping {
      *  例如：entity:   Date time;Date time; Integer a
      *          dto: String time;long time; String  a
      *  包装类型视为同一类型
+     *
+     *  @return /
      */
     boolean copyType() default true;
 
     /**
      * json转对象或对象转json(需要fastjson的支持)
+     *
+     * @return /
      */
     boolean jsonMapping() default false;
 
@@ -126,11 +148,15 @@ public @interface XToolMapping {
      *     public String name(String name) {
      *         return "new User(parts[0], parts[1])";
      *     }
+     *
+     * @return /
      */
     Class<?> resultType() default void.class;
 
     /**
      * #resultType 是否是内部类
+     *
+     * @return /
      */
     boolean resultTypeIsInner() default false;
 
@@ -143,6 +169,8 @@ public @interface XToolMapping {
      *       public String preProcess() {}
      *       public String afterProcess() {}
      *      }
+     *
+     *  @return /
      */
     Class<?> beforeOrAfterHandle() default void.class;
 

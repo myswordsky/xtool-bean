@@ -26,6 +26,7 @@ public class BeanMapping {
     /**
      *  全局只初始化加载一次
      * @param isAutoGen 是否使用groovy动态生成实现
+     * @return /
      */
     public static String initAuto(Boolean isAutoGen){
         if(isInitAuto == null){
@@ -149,6 +150,11 @@ public class BeanMapping {
 
     /**
      * groovy核心组装
+     * @param source /
+     * @param target /
+     * @return /
+     * @param <D> /
+     * @param <E> /
      */
     public static <D, E> E copyAuto(D source, Class<E> target){
         String sourceName = source.getClass().getName();
@@ -216,6 +222,9 @@ public class BeanMapping {
 
     /**
      * 约500ms
+     * @param entity /
+     * @param dto /
+     * @return /
      */
     private static Object groovy(Class<?> entity, Class<?> dto){
         GroovyClassLoader groovyClassLoader = new GroovyClassLoader();
